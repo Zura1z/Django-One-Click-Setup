@@ -5,6 +5,7 @@ source DbConfig
 if [ "$Database" == "postgresql" ]; then
     if [ -n "$DATABASE_NAME" ] && [ -n "$DATABASE_HOST" ] && [ -n "$DATABASE_USER" ] && [ -n "$DATABASE_PASSWORD" ] && [ -n "$DATABASE_PORT" ]; then
         cat DbConfig >> $1/../.env
+
         echo "Configurations copied to .env file."
 
 if [ -z "$1"  ]; then
@@ -24,7 +25,9 @@ if [ ! -f "$settings_file" ]; then
     echo "Error: $settings_file does not exist."
     exit 1
 fi
+if [ -f "$1/db.sqlite3" ]; then
 rm "$1/db.sqlite3"
+fi
 echo "$settings_file"
 sed -i '76,82d' "$settings_file"
 sed -i '76i\

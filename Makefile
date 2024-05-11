@@ -2,7 +2,7 @@ PROJECT_ROOT = backend/src
 DJANGO_PROJECT_NAME = $(PROJECT_NAME)
 
 .PHONY: setup
-setup: create_environment install_dependencies create_project create_core_app add_core_app_to_settings migrate superuser prepare_resources run
+setup: create_environment install_dependencies create_project create_core_app add_core_app_to_settings database_setup migrate superuser prepare_resources run
 
 .PHONY: create_environment
 create_environment:
@@ -38,7 +38,7 @@ prepare_resources:
 	mkdir -p $(PROJECT_ROOT)/scripts  # Ensure the scripts directory exists
 	cp resources/entrypoint.sh $(PROJECT_ROOT)/scripts/
 	echo "DEBUG=True\nSECRET_KEY=YourSecretKeyHere\nDATABASE_URL=postgres://USER:PASSWORD@HOST:PORT/DBNAME" > $(PROJECT_ROOT)/../env.template
-	cp $(PROJECT_ROOT)/../env.template $(PROJECT_ROOT)/../.env 
+	cat $(PROJECT_ROOT)/../env.template >> $(PROJECT_ROOT)/../.env 
 
 .PHONY: run
 run:
@@ -52,7 +52,7 @@ superuser:
 
 .PHONY: database_setup
 database_setup:
-	bash database.sh $(PROJECT_ROOT) $(PROJECT_NAME)
+	bash resources/database.sh $(PROJECT_ROOT) $(PROJECT_NAME)
 .PHONY: migrate
 migrate:
 	cd $(PROJECT_ROOT) && pipenv run python manage.py makemigrations
