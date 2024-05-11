@@ -1,0 +1,10 @@
+#Replace sqlite with postgresql in DatabaseField for postgres
+
+Database=postgresql
+
+#To be filled only in postgresql Database
+DATABASE_NAME=postgres
+DATABASE_HOST=localhost
+DATABASE_USER=postgres
+DATABASE_PASSWORD=postgres
+DATABASE_PORT=5432

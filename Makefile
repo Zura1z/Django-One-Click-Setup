@@ -8,6 +8,7 @@ setup: create_environment install_dependencies create_project create_core_app ad
 create_environment:
 	mkdir -p $(PROJECT_ROOT)  
 	echo "PYTHONUNBUFFERED=1" >> $(PROJECT_ROOT)/../.env  
+
 	python_version=$$(python3 -V 2>&1 | grep -o '[0-9.]*' | head -n1) && \
 	cd backend && pipenv --python $$python_version && \
 	echo "Python version is $$python_version"
@@ -49,6 +50,9 @@ superuser:
 	    --username admin@admin.com \
 	    --email admin@admin.com
 
+.PHONY: database_setup
+database_setup:
+	bash database.sh $(PROJECT_ROOT) $(PROJECT_NAME)
 .PHONY: migrate
 migrate:
 	cd $(PROJECT_ROOT) && pipenv run python manage.py makemigrations
