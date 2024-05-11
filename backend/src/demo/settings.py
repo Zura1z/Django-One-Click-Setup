@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7_je%-y$5p*rffs=1^ry05jm)b0exxeg_=@4gpv=utdir&vsyr'
+SECRET_KEY = 'django-insecure-+oslud+pxp9(z$6l9wzt6r2+--%t2w#@0uo5@z*nhbq+zxp1-d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,6 +73,7 @@ WSGI_APPLICATION = 'demo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+import os 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
