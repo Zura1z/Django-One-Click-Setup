@@ -38,7 +38,7 @@ collectstatic:
 
 .PHONY: run/gunicorn
 run/gunicorn:
-	PYTHONPATH=src gunicorn texttointerface.wsgi:application --bind 0.0.0.0:8000
+	PYTHONPATH=src gunicorn %app_name%.wsgi:application --bind 0.0.0.0:8000
 
 .PHONY: docker/build
 docker/build:
